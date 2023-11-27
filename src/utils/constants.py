@@ -10,7 +10,8 @@ if DEV:
 else:
     # Get API token from Heroku config vars
     ACCESS_TOKEN = os.environ.get('API_TOKEN')
-    
+    print(f'got token {ACCESS_TOKEN}')
+
 # States
 # = range(2)
 
