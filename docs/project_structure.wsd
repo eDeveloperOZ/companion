@@ -1,0 +1,16 @@
+@startmindmap
++ companion
+++ docs
++++ project_structure.md
++++ state_diagram.wsd
+++ data
+++ src
++++ bot
+++++ bot.py
++++ utils 
+++++ constants.py
+++++ handlers.py
+++ test
+++ scripts
+++ README.md
+@endmindmap
