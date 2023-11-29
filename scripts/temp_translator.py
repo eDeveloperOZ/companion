@@ -1,7 +1,7 @@
 from telethon import TelegramClient, events
 from deep_translator import GoogleTranslator
 import os 
-import asyncio
+improt asyncio
 
 DEV = False
 if DEV:
@@ -28,19 +28,22 @@ async def new_message_listener(event):
     # print(event)
     try:
         channel_id = event.chat_id
-        # Check if we have already echoed for this channel
+        # Check if we already echoed for this channel
         if channel_id not in echoed_channels:
             await asyncio.sleep(1)
-            # Send the channel title once
             await client.send_message(tarfet_channel_id, f"From: {event.chat.title}")
             # Mark this channel as echoed
             echoed_channels[channel_id] = True
-        
-        # Translate and send the message
         translated_text = GoogleTranslator(source='auto', target='iw').translate(event.message.message)
-        await client.send_message(tarfet_channel_id, translated_text)
+        event.message.message = translated_text
+        
+        # Echo the translated message
+        await client.send_message(tarfet_channel_id, event.message)
     except Exception as e:
         print(e)
+        pass
+    finally:
+        echoed_channels.pop(channel_id, None)
     
 
 client.start()
