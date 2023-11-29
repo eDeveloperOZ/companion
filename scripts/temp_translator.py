@@ -29,11 +29,11 @@ async def new_message_listener(event):
         channel_id = event.chat_id
         # Check if we already echoed for this channel
         if channel_id not in echoed_channels:
-            translated_text = GoogleTranslator(source='auto', target='iw').translate(event.message.message)
-            event.message.message = translated_text
             await client.send_message(tarfet_channel_id, f"From: {event.chat.title}")
             # Mark this channel as echoed
             echoed_channels[channel_id] = True
+        translated_text = GoogleTranslator(source='auto', target='iw').translate(event.message.message)
+        event.message.message = translated_text
         
         # Echo the translated message
         await client.send_message(tarfet_channel_id, event.message)
@@ -41,8 +41,7 @@ async def new_message_listener(event):
         print(e)
         pass
     finally:
-        echoed_channels[channel_id] = False
-
+        echoed_channels.pop(channel_id, None)
     
 
 client.start()
