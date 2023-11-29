@@ -45,9 +45,13 @@ async def new_message_listener(event):
 
     # If it's a new group or message, send the "From" line
     if is_new_group_or_message:
-        # translate chat title to hebrew 
-        translated_title = GoogleTranslator(source='auto', target='iw').translate(event.chat.title)
-        await client.send_message(tarfet_channel_id, f"From: {event.chat.title}({translated_title})")
+        # translate chat title to hebrew
+        try:
+            translated_title = GoogleTranslator(source='auto', target='iw').translate(event.chat.title)
+            await client.send_message(tarfet_channel_id, f"From: {event.chat.title}({translated_title})")
+        except Exception as e:
+            print(e)
+            await client.send_message(tarfet_channel_id, f"From: {event.chat.title}")
 
     # Now process and send the message content
     try:
