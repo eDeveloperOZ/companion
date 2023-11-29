@@ -16,9 +16,10 @@ else:
         print(e)
         pass
 
-monitored_channel_id = ['gazaalannet','companion_dev', 'gazaalannetgroup', 'gazaalanpa', 'farsna',
-                        'parsine', 'Tasnimnews'
-                        ]
+monitored_channel_id = [
+    'gazaalannet', 'companion_dev', 'gazaalannetgroup', 'gazaalanpa', 'Electrohizbullah'
+    'farsna', 'parsine', 'Tasnimnews', 'gazatv2'
+    ]
 tarfet_channel_id = 'globchaniniw'
 client = TelegramClient('anon', APP_ID, API_HASH)
 
@@ -44,7 +45,9 @@ async def new_message_listener(event):
 
     # If it's a new group or message, send the "From" line
     if is_new_group_or_message:
-        await client.send_message(tarfet_channel_id, f"From: {event.chat.title}")
+        # translate chat title to hebrew 
+        translated_title = GoogleTranslator(source='auto', target='iw').translate(event.chat.title)
+        await client.send_message(tarfet_channel_id, f"From: {event.chat.title}({translated_title})")
 
     # Now process and send the message content
     try:
