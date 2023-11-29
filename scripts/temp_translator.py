@@ -18,7 +18,7 @@ else:
 
 monitored_channel_id = [
     'gazaalannet', 'companion_dev', 'gazaalannetgroup', 'gazaalanpa', 'Electrohizbullah'
-    'farsna', 'parsine', 'Tasnimnews', 'gazatv2'
+    'farsna', 'parsine', 'Tasnimnews', 'gazatv2', 'AjaNews', 'almanarnews'
     ]
 tarfet_channel_id = 'globchaniniw'
 client = TelegramClient('anon', APP_ID, API_HASH)
