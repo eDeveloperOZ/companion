@@ -16,7 +16,9 @@ else:
         print(e)
         pass
 
-monitored_channel_id = ['gazaalannet','companion_dev', 'gazaalannetgroup', 'gazaalanpa', 'farsna']
+monitored_channel_id = ['gazaalannet','companion_dev', 'gazaalannetgroup', 'gazaalanpa', 'farsna',
+                        'parsine', 'Tasnimnews'
+                        ]
 tarfet_channel_id = 'globchaniniw'
 client = TelegramClient('anon', APP_ID, API_HASH)
 
