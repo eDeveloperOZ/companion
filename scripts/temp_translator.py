@@ -40,6 +40,9 @@ async def new_message_listener(event):
     except Exception as e:
         print(e)
         pass
+    finally:
+        echoed_channels[channel_id] = False
+
     
 
 client.start()
