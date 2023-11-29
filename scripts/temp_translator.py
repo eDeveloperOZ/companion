@@ -16,7 +16,7 @@ else:
         print(e)
         pass
 
-monitored_channel_id = ['gazaalannet','companion_dev', 'pythontelegrambotgroup', 'TelegramTips']
+monitored_channel_id = ['gazaalannet','companion_dev', 'gazaalannetgroup']
 
 tarfet_channel_id = 'globchaniniw'
 
