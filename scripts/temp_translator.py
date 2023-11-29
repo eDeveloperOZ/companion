@@ -16,7 +16,7 @@ else:
         print(e)
         pass
 
-monitored_channel_id = ['gazaalannet','companion_dev', 'gazaalannetgroup']
+monitored_channel_id = ['gazaalannet','companion_dev', 'gazaalannetgroup', 'gazaalanpa']
 
 tarfet_channel_id = 'globchaniniw'
 
