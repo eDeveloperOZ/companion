@@ -49,10 +49,10 @@ async def new_message_listener(event):
         # translate chat title to hebrew
         try:
             translated_title = GoogleTranslator(source='auto', target='iw').translate(event.chat.title)
-            await client.send_message(tarfet_channel_id, f"From: {event.chat.title}({translated_title})")
+            await client.send_message(target_channel_id, f"From: {event.chat.title}({translated_title})")
         except Exception as e:
             print(e)
-            await client.send_message(tarfet_channel_id, f"From: {event.chat.title}")
+            await client.send_message(target_channel_id, f"From: {event.chat.title}")
 
     # Now process and send the message content
     try:
@@ -60,7 +60,7 @@ async def new_message_listener(event):
         translated_text = GoogleTranslator(source='auto', target='iw').translate(event.message.message)
         event.message.message = translated_text
         # Send the translated message content
-        await client.send_message(tarfet_channel_id, event.message)
+        await client.send_message(target_channel_id, event.message)
     except Exception as e:
         print(e)
     
