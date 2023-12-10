@@ -17,9 +17,10 @@ else:
         pass
 
 monitored_channel_id = [
-    'gazaalannet', 'companion_dev', 'Hezbollah', 'gazaalanpa', 'Electrohizbullah',
-    'farsna', 'parsine', 'Tasnimnews', 'gazatv2', 'AjaNews', 'almanarnews', 'GazaNewsNow',
-    'ahfadalbahaa', 'sepah_pasdaran', 'NewsPs0', 
+    'gazaalannet', 'companion_dev', 'Hezbollah', 'gazaalanpa',
+    'Electrohizbullah','farsna', 'parsine', 'Tasnimnews',
+    'gazatv2', 'AjaNews', 'almanarnews','GazaNewsNow', 
+    'ahfadalbahaa', 'sepah_pasdaran', 'NewsPs0', 'MohamadDabaa',
     ]
 target_channel_id = 'globchaniniw'
 client = TelegramClient('anon', APP_ID, API_HASH)
