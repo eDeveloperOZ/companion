@@ -2,7 +2,7 @@ from telethon import TelegramClient, events
 from deep_translator import GoogleTranslator
 import os 
 
-DEV = True
+DEV = False
 if DEV:
     from dotenv import load_dotenv
     load_dotenv()
