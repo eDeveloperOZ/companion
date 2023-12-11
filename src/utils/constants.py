@@ -14,7 +14,6 @@ else:
     ACCESS_TOKEN = os.environ.get('API_TOKEN')
     APP_ID=os.environ.get('APP_ID')
     APP_HASH=os.environ.get('APP_HASH')
-
 # States
 # = range(2)
 
