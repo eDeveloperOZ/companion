@@ -73,10 +73,10 @@ async def find_and_delete_similar_messages(client, messages, similarity_threshol
 
 
 # Function to wait until the next round hour
-async def wait_until_next_hour():
+async def wait_for_twenty_minutes():
     while True:
         now = datetime.now()
-        if now.minute == 0 and now.second == 0:
+        if now.minute % 20 == 0 and now.second == 0:
             break
         await asyncio.sleep(1)  # Wait 1 second before checking again
 
@@ -87,7 +87,7 @@ async def main():
 
     while True:  # Continuous loop
         if not DEV:
-            await wait_until_next_hour()  # Wait until the next round hour
+            await wait_for_twenty_minutes()  # Wait until the next round hour
         
         all_messages, last_message_id = await fetch_all_messages(client, CHANNEL_TO_SCAN)
 
