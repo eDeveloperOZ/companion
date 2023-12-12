@@ -81,7 +81,7 @@ async def is_message_similar(client, new_message, similarity_threshold=0.7):
     # let the message to be sent
     await asyncio.sleep(0.2)
     # Fetch last 10 messages from the target channel
-    last_messages = await client.get_messages(target_channel_id, limit=10)
+    last_messages = await client.get_messages(target_channel_id, limit=25)
 
     # Prepare texts for comparison
     # Translate the new message
