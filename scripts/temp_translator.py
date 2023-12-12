@@ -78,6 +78,10 @@ async def new_message_listener(event):
     
 
 async def is_message_similar(client, new_message, similarity_threshold=0.7):
+    
+    # Skip if the new message is None
+    if new_message is None:
+        return False
     # let the message to be sent
     await asyncio.sleep(0.2)
     # Fetch last 10 messages from the target channel
@@ -85,7 +89,13 @@ async def is_message_similar(client, new_message, similarity_threshold=0.7):
 
     # Prepare texts for comparison
     # Translate the new message
-    translated_text = GoogleTranslator(source='auto', target='iw').translate(new_message)
+    try:
+        translated_text = GoogleTranslator(source='auto', target='iw').translate(new_message)
+        if translated_text is None:
+            return False
+    except Exception as e:
+        print(f"Translation failed: {e}")
+        return False
     texts = [msg.message for msg in last_messages] + [translated_text]
     if len(texts) < 2:  # Not enough messages to compare
         return False
