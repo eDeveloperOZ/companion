@@ -55,14 +55,14 @@ async def new_message_listener(event):
     if not await is_message_similar(client, event.message.message):
         print(f"Message {event.message.id} is not similar to previous messages, sending...")
         # If it's a new group or message, send the "From" line
-        if is_new_group_or_message:
-            # translate chat title to hebrew
-            try:
-                translated_title = GoogleTranslator(source='auto', target='iw').translate(event.chat.title)
-                await client.send_message(target_channel_id, f"From: {event.chat.title}({translated_title})")
-            except Exception as e:
-                print(e)
-                await client.send_message(target_channel_id, f"From: {event.chat.title}")
+        # if is_new_group_or_message:
+        #     # translate chat title to hebrew
+        #     try:
+        #         translated_title = GoogleTranslator(source='auto', target='iw').translate(event.chat.title)
+        #         await client.send_message(target_channel_id, f"From: {event.chat.title}({translated_title})")
+        #     except Exception as e:
+        #         print(e)
+        #         await client.send_message(target_channel_id, f"From: {event.chat.title}")
 
         # Now process and send the message content
         try:
