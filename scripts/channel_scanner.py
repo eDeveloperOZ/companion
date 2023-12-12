@@ -85,24 +85,25 @@ async def main():
     client = TelegramClient('scanner', APP_ID, API_HASH)
     await client.start()
 
-    if not DEV:
-        await wait_until_next_hour()
-    
-    all_messages, last_message_id = await fetch_all_messages(client, CHANNEL_TO_SCAN)
+    while True:  # Continuous loop
+        if not DEV:
+            await wait_until_next_hour()  # Wait until the next round hour
+        
+        all_messages, last_message_id = await fetch_all_messages(client, CHANNEL_TO_SCAN)
 
-    # Process in batches of 1000
-    batch_size = 1000
-    total_deleted = 0
-    for start_index in range(0, len(all_messages), batch_size):
-        end_index = min(start_index + batch_size, len(all_messages))
-        batch = all_messages[start_index:end_index]
-        print(f"Processing messages {start_index} to {end_index - 1}")
-        total_deleted += await find_and_delete_similar_messages(client, batch)
+        # Process in batches of 1000
+        batch_size = 1000
+        total_deleted = 0
+        for start_index in range(0, len(all_messages), batch_size):
+            end_index = min(start_index + batch_size, len(all_messages))
+            batch = all_messages[start_index:end_index]
+            print(f"Processing messages {start_index} to {end_index - 1}")
+            total_deleted += await find_and_delete_similar_messages(client, batch)
 
-    report_message = f"🚨🚨🚨 **Important Channel Update** 🚨🚨🚨\n\n**{total_deleted} duplicate messages were removed!**\n\n"
-    await client.send_message(CHANNEL_TO_SCAN, report_message, parse_mode='md')
+        report_message = f"🚨🚨🚨 **Important Channel Update** 🚨🚨🚨\n\n**{total_deleted} duplicate messages were removed!**\n\n"
+        await client.send_message(CHANNEL_TO_SCAN, report_message, parse_mode='md')
 
-    print(f"Process started from message ID: {last_message_id}")
+        print(f"Process started from message ID: {last_message_id}")
 
 # Run the script
 if __name__ == '__main__':
