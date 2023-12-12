@@ -6,7 +6,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 import asyncio
 
 
-DEV = True
+DEV = False
 if DEV:
     from dotenv import load_dotenv
     load_dotenv()
@@ -78,27 +78,29 @@ async def new_message_listener(event):
     
 
 async def is_message_similar(client, new_message, similarity_threshold=0.7):
-    
     # Skip if the new message is None
     if new_message is None:
         return False
-    # let the message to be sent
-    await asyncio.sleep(0.2)
-    # Fetch last 10 messages from the target channel
+
+    # Fetch last 25 messages from the target channel
     last_messages = await client.get_messages(target_channel_id, limit=25)
 
-    # Prepare texts for comparison
-    # Translate the new message
+    # Translate the new message, skip if translation fails
     try:
         translated_text = GoogleTranslator(source='auto', target='iw').translate(new_message)
-        if translated_text is None:
+        if translated_text is None or translated_text.strip() == '':
             return False
     except Exception as e:
         print(f"Translation failed: {e}")
         return False
-    texts = [msg.message for msg in last_messages] + [translated_text]
-    if len(texts) < 2:  # Not enough messages to compare
+
+    # Filter out None and empty messages from the last messages
+    texts = [msg.message for msg in last_messages if msg.message and msg.message.strip() != '']
+    if len(texts) == 0:  # No valid messages to compare
         return False
+
+    # Add the new message for comparison
+    texts.append(translated_text)
 
     # Calculate TF-IDF and cosine similarity
     vectorizer = TfidfVectorizer()
@@ -107,6 +109,7 @@ async def is_message_similar(client, new_message, similarity_threshold=0.7):
 
     # Check if any message is similar
     return any(similarity >= similarity_threshold for similarity in cosine_sim)
+
 
 
 client.start()
