@@ -61,9 +61,10 @@ async def find_and_delete_similar_messages(client, messages, similarity_threshol
                     processed[j] = True
 
             if len(similar_batch) > 1:
-                # Sort similar messages by timestamp, keeping the latest message
-                similar_batch.sort(key=lambda x: x[0].timestamp, reverse=True)
+                # Sort similar messages by timestamp, keeping the oldest message
+                similar_batch.sort(key=lambda x: x[0].timestamp)
                 messages_to_delete = [msg[0].id for msg in similar_batch[1:]]
+
 
                 for msg_id in messages_to_delete:
                     await client.delete_messages(CHANNEL_TO_SCAN, [msg_id])
