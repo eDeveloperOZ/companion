@@ -26,7 +26,8 @@ monitored_channel_id = [
     'gazatv2', 'AjaNews', 'almanarnews','GazaNewsNow', 
     'ahfadalbahaa', 'sepah_pasdaran', 'NewsPs0', 'MohamadDabaa',
     'hamaas_ps', 'kataebabuali2', 'abuhamzasarayaa', 'alidaralipress',
-    'TahrirPulse1', 'Eye_of_resistance','From_hebron', 'telepressnews', 
+    'TahrirPulse1', 'Eye_of_resistance','From_hebron', 'telepressnews',
+    'FarsNewsInt', 
     ]
 target_channel_id = 'globchaniniw'
 client = TelegramClient('anon', APP_ID, API_HASH)
