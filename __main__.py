@@ -1,10 +1,11 @@
 # main.py
 import sys
-from src.bot.bot import run_bot
+from src.app import App
 
 def main():
     try:
-        run_bot()
+        app = App()
+        app.run()
     except Exception as e:
         print(e)
         sys.exit(1)
