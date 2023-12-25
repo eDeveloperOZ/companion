@@ -1,14 +1,14 @@
-# main.py
 import sys
+import asyncio
 from src.app import App
 
-def main():
+async def main():
     try:
         app = App()
-        app.run()
+        await app.run()
     except Exception as e:
         print(e)
         sys.exit(1)
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
