@@ -1,7 +1,7 @@
 # app.py
 from telethon import TelegramClient, events
-from translator import ChannelTranslator
-from duplicate_scanner import DuplicateScanner
+from .translator import ChannelTranslator
+from .duplicate_scanner import DuplicateScanner
 from .utils.config import Config
 from .utils.constants import TARGET_CHANNEL_ID
 import asyncio
@@ -17,7 +17,8 @@ class App:
 
 
     async def new_message_listener(self, event):
-        print(f"Received message ID: {event.message.id} with Group ID: {event.message.grouped_id}")
+        if Config.DEV:
+            print(f"Received message ID: {event.message.id} with Group ID: {event.message.grouped_id}")
 
         group_id = event.message.grouped_id
         if group_id is None:
@@ -32,8 +33,11 @@ class App:
             if not await self.translator.is_message_similar(event.message.message, last_messages):
                 translated_text = await self.translator.translate_message(event.message.message)
                 if translated_text:
+                    print(f"Message {event.message.id} is not similar to previous messages, sending...")
                     event.message.message = translated_text
                     await self.client.send_message(TARGET_CHANNEL_ID, event.message)
+            else:
+                print(f"Message {event.message.id} is similar to previous messages, skipping...")
 
     async def run(self):
         await self.client.start()
