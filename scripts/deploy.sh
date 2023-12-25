@@ -21,7 +21,7 @@ push_changes() {
     fi
 }
 
-if [ "BRANCH_NAME" = "devel" ]; then
+if [ "$BRANCH_NAME" = "devel" ]; then
     echo "On devel branch"
     if [ -n "$(git status --porcelain)" ]; then
         echo "Git status is not clean, please commit changes before deploying"
