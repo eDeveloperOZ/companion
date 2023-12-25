@@ -6,6 +6,7 @@
 # Get the current working directory and move up one directory level
 WORK_DIR=$(pwd)
 cd "$WORK_DIR/.."
+BRANCH_NAME=$(git branch --show-current)
 
 # Function to push changes from one branch to another
 push_changes() {
