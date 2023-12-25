@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 import os
 
 class Config:
-    DEV = True
+    DEV = False
     MONITORED_CHANNEL_IDS = [
         'gazaalannet', 'companion_dev', 'Hezbollah', 'gazaalanpa',
         'Electrohizbullah', 'farsna', 'parsine', 'Tasnimnews',
