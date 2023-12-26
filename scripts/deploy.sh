@@ -27,7 +27,7 @@ if [ "$BRANCH_NAME" = "devel" ]; then
         exit 1
     else
         echo "Pushing changes from main to backup"
-        git merge main backup
+        push_changes main backup 
         echo "Pushing changes from devel to main"
         push_changes devel main
     fi
