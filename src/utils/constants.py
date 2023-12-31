@@ -1,5 +1,5 @@
 from pathlib import Path
-import os
+from .config import Config
 
 
 TARGET_CHANNEL_ID = 'globchaniniw'
@@ -13,4 +13,8 @@ UTILS_DIR = SRC_DIR / 'utils'
 LOGS_DIR = PROJECT_DIR / 'logs'
 DOCS_DIR = PROJECT_DIR / 'docs'
 
-MODEL_PATH = DATA_DIR / 'model'
+if Config.DEV:
+    MODEL_PATH = DATA_DIR / 'model_dev'
+else:
+    MODEL_PATH = Path('/opt/model') 
+
