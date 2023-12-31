@@ -15,8 +15,7 @@ class Config:
 
     @classmethod
     def load_environment(cls):
-        if cls.DEV:
-            load_dotenv()
+        load_dotenv()
         cls.APP_ID = os.getenv('APP_ID', 'default_app_id')
         cls.API_HASH = os.getenv('API_HASH', 'default_api_hash')
         cls.ACCESS_TOKEN = os.getenv('API_TOKEN', 'default_token')
